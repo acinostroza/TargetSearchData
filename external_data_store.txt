@@ -1,1 +1,1 @@
-inst/data/gc-ms-data
+inst/gc-ms-data
