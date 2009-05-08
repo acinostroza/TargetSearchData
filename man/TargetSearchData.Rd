@@ -21,6 +21,7 @@
 }
 \format{
 	The data contains the following objects:
+    \describe{
 	\item{sampleDescription}{a \code{tsSample} object. The sample description.}
 	\item{refLibrary}{a \code{tsLib} object. The reference library.}
 	\item{rimLimits}{a \code{tsRim} object. The RI markers definition.}
@@ -29,6 +30,7 @@
 	\item{peakData}{a \code{tsMSdata} object. The intensities and RIs of all the
 		masses that were searched for.}
 	\item{metabProfile}{a \code{tsProfile} object. The metabolite profile.}
+    }
 }
 \details{
 	All files are located in \code{gc-ms-data} subdirectory.
