@@ -7,6 +7,7 @@
 \alias{corRI}
 \alias{peakData}
 \alias{metabProfile}
+\alias{.required}
 \docType{data}
 \title{Example GC-MS data for TargetSearch Package}
 \description{
