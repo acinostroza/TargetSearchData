@@ -46,7 +46,7 @@
 require(TargetSearch)
 
 ## The directory with the NetCDF GC-MS files
-cdfpath <- file.path(.find.package("TargetSearchData"), "gc-ms-data")
+cdfpath <- file.path(find.package("TargetSearchData"), "gc-ms-data")
 cdfpath
 list.files(cdfpath)
 samp.file <- file.path(cdfpath, "samples.txt")
