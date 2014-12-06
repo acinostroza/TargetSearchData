@@ -1,7 +1,7 @@
 Package: TargetSearchData
 Type: Package
 Title: Example GC-MS data for TargetSearch Package
-Version: 1.5.0
+Version: 1.5.1
 Date: 2010-03-22
 Author: Alvaro Cuadros-Inostroza, Henning Redestig, Matt Hannah
 Maintainer: Alvaro Cuadros-Inostroza <inostroza@mpimp-golm.mpg.de>
@@ -9,5 +9,5 @@ Maintainer: Alvaro Cuadros-Inostroza <inostroza@mpimp-golm.mpg.de>
         Matt Hannah <hannah@mpimp-golm.mpg.de>
 Depends: TargetSearch
 Description: This package provides example GC-MS data for TargetSearch Package.
-biocViews: ExperimentData
+biocViews: ExperimentData, Escherichia_coli_Data
 License: GPL (>= 2)
