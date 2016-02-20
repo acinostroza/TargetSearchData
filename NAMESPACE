@@ -1,1 +1,3 @@
+import("TargetSearch")
+
 exportPattern(".")
