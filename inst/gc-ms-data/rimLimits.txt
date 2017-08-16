@@ -1,0 +1,4 @@
+LowerLimit	UpperLimit	RIstandard
+230	280	262320
+290	340	323120
+350	400	381020
