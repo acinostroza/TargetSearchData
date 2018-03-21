@@ -1,78 +1,49 @@
 \name{TargetSearchData}
 \alias{TargetSearchData}
-\alias{sampleDescription}
-\alias{refLibrary}
-\alias{rimLimits}
-\alias{RImatrix}
-\alias{corRI}
-\alias{peakData}
-\alias{metabProfile}
-\alias{.required}
-\docType{data}
+\docType{package}
 \title{Example GC-MS data for TargetSearch Package}
 \description{
-  A \code{TargetSearch} example GC-MS data. This package contains raw NetCDF files
+  A \code{TargetSearch} example GC-MS data files. This package contains raw NetCDF files
   from a E.coli salt stress experiment, extracted peak list of each NetCDF file and
   three tab-delimted text files: a sample description, a reference library and
-  a retention index marker definition. The data	is a subset of the original data
+  a retention index marker definition. The data is a subset of the original data
   from 200-400 seconds and 85-320 m/z. 
 }
-\usage{
- 	data(TargetSearchData)
-}
-\format{
-	The data contains the following objects:
-    \describe{
-	\item{sampleDescription}{a \code{tsSample} object. The sample description.}
-	\item{refLibrary}{a \code{tsLib} object. The reference library.}
-	\item{rimLimits}{a \code{tsRim} object. The RI markers definition.}
-	\item{RImatrix}{a matrix object. The retention time of the RI markers.}
-	\item{corRI}{a matrix object. The sample RI.}
-	\item{peakData}{a \code{tsMSdata} object. The intensities and RIs of all the
-		masses that were searched for.}
-	\item{metabProfile}{a \code{tsProfile} object. The metabolite profile.}
-    }
-}
+
 \details{
-	All files are located in \code{gc-ms-data} subdirectory.
+  These package does not provide any R function or data structure, only
+  exemplary experiment files for \code{TargetSearch}.
+
+  All files are located in \code{gc-ms-data} subdirectory. The following
+  files are provided.
+  \itemize{
+  \item \code{samples.txt}. Tab-delimited file of the samples metadata.
+  It provides the CDF raw file, measurement day and the time point of the
+  experiment.
+
+  \item \code{rimLimits.txt}. Tab-delimited file of the retention time
+  markers (or FAMEs). See \code{\link[TargetSearch]{ImportFameSettings}} 
+  for details.
+
+  \item \code{library.txt}. Tab-delimited file of the metabolite library
+  to be searched. See \code{\link[TargetSearch]{ImportLibrary}} for details.
+
+  \item \code{7235eg*.cdf}. NetCDF files of the baseline-corrected raw metabolite
+  data. One file correspond to one sample.
+
+  \item \code{RI_7235eg*.txt}. Retention Index corrected and extracted
+  peaks of the corresponding NetCDF files. These files are simple tab-delimited
+  files containing the retention time, retention index, and spectra. Each
+  spectrum is a list of m/z and intensities separated by colons (:).
+  }
 }
 
 \seealso{
   \code{\link[TargetSearch]{ImportLibrary}},
   \code{\link[TargetSearch]{ImportSamples}},
-  \code{\link[TargetSearch]{ImportFameSettings}},	  
+  \code{\link[TargetSearch]{ImportFameSettings}},
 }
-\examples{
-require(TargetSearch)
 
-## The directory with the NetCDF GC-MS files
-cdfpath <- file.path(find.package("TargetSearchData"), "gc-ms-data")
-cdfpath
-list.files(cdfpath)
-samp.file <- file.path(cdfpath, "samples.txt")
-rim.file  <- file.path(cdfpath, "rimLimits.txt")
-lib.file  <- file.path(cdfpath, "library.txt")
-
-# import files from package
-sampleDescription <- ImportSamples(samp.file, CDFpath = cdfpath, RIpath = ".")
-refLibrary        <- ImportLibrary(lib.file)
-rimLimits         <- ImportFameSettings(rim.file, mass = 87)
-# perform RI correction
-RImatrix          <- RIcorrect(sampleDescription, rimLimits, massRange = c(85,320),
-                   IntThreshold = 25, pp.method = "ppc", Window = 15)
-# update median RI
-refLibrary        <- medianRILib(sampleDescription, refLibrary)
-# get the sample RI
-corRI             <- sampleRI(sampleDescription, refLibrary, r_thres = 0.95)
-# obtain the peak Intensities of all the masses in the library
-peakData          <- peakFind(sampleDescription, refLibrary, corRI)
-# make a profile of the metabolite data
-metabProfile      <- Profile(sampleDescription, refLibrary, peakData, r_thres = 0.95)
-
-# show the metabolite profile
-profileInfo(metabProfile)
-# show the matrix intensities
-Intensity(metabProfile)
-
+\author{
+  Maintainer: Alvaro Cuadros-Inostroza <inostroza@mpimp-golm.mpg.de>
 }
-\keyword{datasets}
