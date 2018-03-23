@@ -1,8 +1,8 @@
 Package: TargetSearchData
 Type: Package
 Title: Example GC-MS data for TargetSearch Package
-Version: 1.17.1
-Date: 2018-03-21
+Version: 1.17.2
+Date: 2018-04-26
 Author: Alvaro Cuadros-Inostroza, Henning Redestig, Matt Hannah
 Maintainer: Alvaro Cuadros-Inostroza <inostroza@mpimp-golm.mpg.de>
 Description: This package provides example GC-MS data for TargetSearch Package.

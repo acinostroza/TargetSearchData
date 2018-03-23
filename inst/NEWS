@@ -1,0 +1,11 @@
+		CHANGES IN VERSION 1.17.2
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+   o	The dataset `TargetSearchData` which used to contain `TargetSearch` objects
+	has been moved from package `TargetSearchData` to package `TargetSearch`.
+	Note that the dataset name has been renamed to `TSExample`. To load it use
+
+	data(TSExample)
+
+	within `TargetSearch`.
