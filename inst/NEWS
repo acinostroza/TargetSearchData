@@ -1,3 +1,11 @@
+		CHANGES IN VERSION 1.36.0
+
+NEW FEATURES
+
+   o	Helper functions are added to the package. These functions are a simple
+	interface to retrieve the data files provided by this package. The functions
+	are mostly relevant in TargetSearch examples.
+
 		CHANGES IN VERSION 1.17.2
 
 SIGNIFICANT USER-VISIBLE CHANGES
