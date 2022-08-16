@@ -11,8 +11,13 @@
 }
 
 \details{
-  The package does not provide any R function or data structure, only
+  The package does not provide any data structure, only
   exemplary experiment files for \code{\link[TargetSearch]{TargetSearch}}.
+
+  Helper functions are also provided. These are needed by \code{\link[TargetSearch]{TargetSearch}}
+  examples to retrieve the paths to the examplary files. These functions are prefixed with
+  \code{tsd_} and their documentation can be found \code{\link[=utils]{here}}. Most likely,
+  they are not needed elsewhere.
 
   All files are in the \code{gc-ms-data} subdirectory. The following
   files are provided.
@@ -49,9 +54,11 @@
 }
 
 \seealso{
+  The import functions in \code{\link[TargetSearch]{TargetSearch}}
   \code{\link[TargetSearch]{ImportLibrary}},
   \code{\link[TargetSearch]{ImportSamples}},
   \code{\link[TargetSearch]{ImportFameSettings}},
+  and the \code{\link[=utils]{helper}} functions.
 }
 
 \author{
