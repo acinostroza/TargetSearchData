@@ -8,14 +8,18 @@
 
 `tsd_data_path` <- function(datapath='gc-ms-data')
 {
-    return(file.path(tsd_path(), datapath))
+    ret <- dir.exists(path <- file.path(tsd_path(), datapath))
+    if(all(ret))
+        return(path)
+    stop("Directory not found: ", path[!ret][1])
 }
 
 `tsd_file_path` <- function(filename, ...)
 {
-    path <- file.path(tsd_data_path(...), filename)
-    stopifnot(file.exists(path))
-    return(path)
+    ret <- file.exists(path <- file.path(tsd_data_path(...), filename))
+    if(all(ret))
+        return(path)
+    stop("File not found: ", path[!ret][1])
 }
 
 `tsd_cdffiles` <- function(...)
