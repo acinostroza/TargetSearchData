@@ -1,2 +1,5 @@
-
-exportPattern(".")
+export(tsd_path)
+export(tsd_data_path)
+export(tsd_file_path)
+export(tsd_cdffiles)
+export(tsd_rifiles)
