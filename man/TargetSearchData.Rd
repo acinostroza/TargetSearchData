@@ -3,8 +3,8 @@
 \docType{package}
 \title{Example GC-MS data for TargetSearch Package}
 \description{
-  A \code{\link[TargetSearch]{TargetSearch}} example GC-MS data files. This package contains
-  raw NetCDF files from a E. coli salt stress experiment (Jozefczuk et al., 2010), extracted
+  A set of GC-MS example data files for \code{\link[TargetSearch]{TargetSearch}}. This package
+  contains raw NetCDF files from an E. coli salt stress experiment (Jozefczuk et al., 2010), extracted
   peak list of each NetCDF file, and three tab-delimited text files: a sample description, a
   reference library, and a retention index marker definition. The chromatographic data is a
   subset of the original NetCDF files restricted to 200-400 seconds and 85-320 \emph{m/z}.
@@ -15,7 +15,7 @@
   exemplary experiment files for \code{\link[TargetSearch]{TargetSearch}}.
 
   Helper functions are also provided. These are needed by \code{\link[TargetSearch]{TargetSearch}}
-  examples to retrieve the paths to the examplary files. These functions are prefixed with
+  examples to retrieve the paths to the demo files. These functions are prefixed with
   \code{tsd_} and their documentation can be found \code{\link[=utils]{here}}. Most likely,
   they are not needed elsewhere.
 
