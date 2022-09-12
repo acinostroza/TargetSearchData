@@ -3,8 +3,18 @@ Type: Package
 Title: Example GC-MS data for TargetSearch Package
 Version: 1.35.1
 Date: 2022-08-15
-Author: Alvaro Cuadros-Inostroza, Henning Redestig, Matt Hannah
+Authors@R: c(person("Alvaro", "Cuadros-Inostroza", role=c("aut", "cre"),
+                     email="acuadros+bioc@gmail.com"),
+             person("Jan", "Lisec", role="aut"),
+             person("Henning", "Redestig", role="aut"),
+             person("Matt", "Hannah", role="aut"))
 Maintainer: Alvaro Cuadros-Inostroza <acuadros+bioc@gmail.com>
-Description: This package provides example GC-MS data for TargetSearch Package.
+Description: Example files of GC-MS data for the TargetSearch Package.
+    The package contains raw NetCDF files from a E.coli salt stress
+    experiment, extracted peak lists, and sample metadata required for
+    a GC-MS analysis. The raw data has been restricted for demonstration
+    purposes.
 biocViews: ExperimentData, Escherichia_coli_Data
 License: GPL (>= 2)
+URL: https://github.com/acinostroza/TargetSearchData
+BugReports: https://github.com/acinostroza/TargetSearchData/issues
