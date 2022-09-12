@@ -1,0 +1,252 @@
+%\VignetteIndexEntry{The TargetSearchData Package}
+%\VignetteKeywords{preprocess, GC-MS, analysis, CDF data}
+%\VignettePackage{TargetSearchData}
+
+\documentclass[a4paper]{article}
+
+\usepackage[dvipsnames]{xcolor}
+\usepackage{setspace}
+\usepackage{fancyvrb}
+\usepackage{hyperref}
+\usepackage{listings}
+
+\usepackage{bera}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[sf,bf,compact]{titlesec}
+\usepackage{natbib}
+
+% definitions from BiocStyle
+\definecolor{functioncolor}{RGB}{240, 112, 32}
+
+\newcommand\Biocpkg[1]{{\href{https://bioconductor.org/packages/#1}{\textsl{#1}}}}
+\newcommand{\Rfunction}[1]{\texttt{\textcolor{functioncolor}{#1}}}
+\newcommand{\code}[1]{\colorbox{gray!10}{\texttt{\textcolor{black!50!red}{#1}}}}
+
+% --------------------------------------------------------------------------
+% page layout
+
+\voffset=-15mm
+\textwidth=159mm
+\textheight=232mm
+\oddsidemargin=0in
+\evensidemargin=0in
+\headheight=14pt
+\footskip=15mm
+
+\setlength\parindent{0pt}
+\setlength{\parskip}{1.2ex}
+\onehalfspacing
+
+% --------------------------------------------------------------------------
+
+% \usepackage{Sweave} % disable Sweave
+
+\newenvironment{Schunk}{}{}
+\DefineVerbatimEnvironment{File}{Verbatim}{%
+  fontsize=\small,
+  formatcom=\color{Black!80},
+  frame=single}
+
+% style for listing
+\lstdefinestyle{rstylein}{%
+  backgroundcolor=\color{gray!10},
+  basicstyle=\small\sl\ttfamily,
+  frame=single,framerule=0pt % give a bit of margin
+}
+\lstdefinestyle{rstyleout}{%
+  backgroundcolor=\color{gray!10},
+  basicstyle=\small\ttfamily\color{black!80},
+  frame=single,framerule=0pt % give a bit of margin
+}
+\lstnewenvironment{Sinput}{\lstset{style=rstylein}}{}
+\lstnewenvironment{Soutput}{\lstset{style=rstyleout}}{}
+
+% --------------------------------------------------------------------------
+
+\title{\sf The TargetSearchData Package}
+\author{\sf Álvaro Cuadros-Inostroza}
+\date{\sf\today}
+
+<<options, echo=FALSE>>=
+require(TargetSearchData)
+options(width=80)
+@
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}\sf
+This package contains exemplary files for the package \Biocpkg{TargetSearch}. It
+includes raw NetCDF files from an {\em E. coli} salt stress experiment,
+extracted peak list for each CDF file, a sample description file, a  metabolite
+reference library, and a retention index marker definition file.
+\end{abstract}
+
+\section{Package Contents}
+
+The \Biocpkg{TargetSearchData} package contains as subset of metabolite data
+collected from a {\em E. coli} salt stress experiment. This was part of a stress
+response study described in \cite{Jozefczuk2010}. The samples were measured in
+an Agilent 6890 series GC system with a 7683 series autosampler injector coupled
+to a Leco Pegasus 2 time-of-flight mass spectrometer. For further details,
+please refer to said publication.
+
+In addition, this package \textbf{only provides} a couple of simple {\em helper}
+functions; these are intended to be used by \Biocpkg{TargetSearch} in its
+examples. This is dicussed in the following section.
+
+The following subsections describe each type of file in detail.
+
+\subsection{Sample File}
+
+Tab-delimite text file of sample metadata. This provides a list of raw
+\code{CDF} files, their respective measurement day (MD), and the time point of
+the salt stress experiment.  Samples with the same time point correspond to
+biological replicates. Note that the time point is given in arbitrary units,
+more precisely, 1 is the first sampling time, 3 is the third one, and so on.
+
+Note that the measurement day corresponds with the first four digits of the
+chromatogram file name.
+
+\begin{File}[label=samples.txt]
+      CDF_FILE   MEASUREMENT_DAY   TIME_POINT
+  7235eg08.cdf              7235            1
+  7235eg11.cdf              7235            1
+  7235eg26.cdf              7235            1
+  7235eg04.cdf              7235            3
+  7235eg30.cdf              7235            3
+  ...
+\end{File}
+
+\subsection{CDF files}
+
+The \texttt{CDF} files, also known as \texttt{NetCDF}, are a trimmed down version of
+the original, {\em baseline corrected}, files that were experted by {\em LECO Pegasus}
+in the context of the {\em E. coli} salt stress experiment. The baseline correction
+was performed by {\em LECO} using default parameters. For information on the
+experiment, please refer to \cite{Jozefczuk2010}.
+
+In particular, the retention time was bounded between 200 and 400 seconds, while the
+mass-over-charge ratio ($m/z$) between 85 and 320 daltons. This was done in order to reduce
+the package size.
+
+The file names follow a systematic nomenclature: \code{ydddaann.cdf}, where \code{y}
+is the last digit of the year (starting from 2000), \code{ddd} is the day of the year
+(from 1 to 365), \code{aa} is an arbitrary code (originally this was connected
+to a specific mass spectrometer), and \code{nn} is the measurement order of the
+sample in the specified year and day. Together, the part \code{yddd} correspond
+to the measurement day.
+
+\subsection{RI files}
+
+For each \code{CDF} file there is a corresponding retention time corrected
+peak list file, the so-colled \code{RI} files. These are tab-delimited text
+files containing the retention time, retention index, and spectra. Each
+spectrum is a list of \emph{m/z} and intensities separated by colons (:).
+
+The text file format is the original format used in early \Biocpkg{TargetSearch}
+version. There is also a binary format which is used by default and is
+designed for fast reading. These files are not part of this package, however
+(see \Biocpkg{TargetSearch} documentation).
+
+The file name convention is to prefix each \code{CDF} file with \code{RI\_}
+and change the file extension from \code{cdf} to \code{txt} (or \code{dat}
+for the binary format).
+
+\subsection{Library File}
+
+This is tab-delimited text file with the list of metabolite targets (library) to
+search in the chromatograms. Each row is a metabolite, while columns are the
+metabolite name, retention index (RI), time deviation (\code{Win\_1}), selective
+masses (\code{SEL\_MASS}), and the metabolite spectrum.
+
+The time deviation is specified in the first column (\code{Win\_1}) and
+represents the first search window. See \Biocpkg{TargetSearch} vignette for
+details.
+
+\begin{File}[label=library.txt]
+  Name            RI      Win_1  SEL_MASS             SPECTRUM
+  Pyruvic acid    222767  4000   89;115;158;174;189   85:7 86:14 87:7 88:5 ...
+  Glycine (2TMS)  228554  4000   86;102;147;176;204   86:26 87:19 88:8 89:4 ...
+  Valine          271500  2000   100;144;156;218;246  85:8 86:14 87:6 88:5 ...
+  Glycerol (3TMS) 292183  2000   103;117;205;293      85:14 86:2 87:16 88:13 ...
+  Leucine         306800  1500   102;158;232;260      158:999 159:148 160:45 ...
+  ...
+\end{File}
+
+\subsection{Retention Time Correction File}
+
+This is tab-delimited text file of retention time markers. The markers are fatty acid
+methyl esthers (FAME) which elute evenly distributed on the retention time dimension
+and have a characteristic \emph{m/z} value.
+
+\begin{File}[label=rimLimits.txt]
+  LowerLimit UpperLimit RIstandard
+         230        280     262320
+         290        340     323120
+         350        400     381020
+\end{File}
+
+A fourth column called \emph{Mass} can be specified if the \emph{m/z} value is
+\textbf{not} the default of 87. See \Rfunction{ImportFameSettings} documentation
+from \Biocpkg{TargetSearch}.
+
+\section{Helper functions}
+
+Simple functions are provided to return the absolute file path of the files
+contained in \Biocpkg{TargetSearchData}. These function are used frequently in
+\Biocpkg{TargetSearch} examples as a shorthand to function calls such as
+\Rfunction{find.package()} and \Rfunction{file.path()}. The functions also
+perform some basic checks internally. All these functions have a \Rfunction{tsd\_}
+prefix. The following shows a brief description and examples of these functions.
+
+The function \Rfunction{tsd\_path()} is a function to locate \Biocpkg{TargetSearchData}
+installation path, where the example files are found. It's built on
+\Rfunction{find.package()}.
+
+<<f1>>==
+path <- tsd_path()
+path
+@
+
+The function \Rfunction{tsd\_data\_path()} returns the path where the example
+files are. They are in a subdirectory called \code{gc-ms-data}, which can be
+passed as argument, though this is not needed.
+
+<<f2>>==
+path <- tsd_data_path()
+dir(path)
+@
+
+The function \Rfunction{tsd\_file\_path()} returns of path of one or more files
+contained in the directory \code{gc-ms-data}. It takes a character vector as
+argument. If the file does not exist, then it raises an error.
+
+<<f3>>==
+tsd_file_path(c('samples.txt','library.txt'))
+@
+
+Finally, the functions \Rfunction{tsd\_cdffiles} and \Rfunction{tsd\_rifiles}
+return the list of \code{CDF} and \code{RI} files contained in the data path
+respectively.
+
+<<f4>>==
+cdf <- tsd_cdffiles()
+ri <- tsd_rifiles()
+@
+
+\section{Session Info}
+
+Output of \Rfunction{sessionInfo()} on the system on which this document was compiled.
+
+<<sessionInfo>>=
+sessionInfo()
+@
+
+\bibliographystyle{unsrtnat}
+\bibliography{biblio}
+
+\end{document}
+% vim: set ts=2 sw=2 et textwidth=80:
