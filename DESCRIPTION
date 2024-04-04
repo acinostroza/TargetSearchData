@@ -1,8 +1,8 @@
 Package: TargetSearchData
 Type: Package
 Title: Example GC-MS data for TargetSearch Package
-Version: 1.41.0
-Date: 2022-09-12
+Version: 1.41.1
+Date: 2024-04-04
 Authors@R: c(person("Alvaro", "Cuadros-Inostroza", role=c("aut", "cre"),
                      email="acuadros+bioc@gmail.com"),
              person("Jan", "Lisec", role="aut"),
