@@ -95,7 +95,7 @@ please refer to said publication.
 
 In addition, this package \textbf{only provides} a couple of simple {\em helper}
 functions; these are intended to be used by \Biocpkg{TargetSearch} in its
-examples. This is dicussed in the following section.
+examples. This is discussed in the following section.
 
 The following subsections describe each type of file in detail.
 
@@ -142,7 +142,7 @@ to the measurement day.
 \subsection{RI files}
 
 For each \code{CDF} file there is a corresponding retention time corrected
-peak list file, the so-colled \code{RI} files. These are tab-delimited text
+peak list file, the so-called \code{RI} files. These are tab-delimited text
 files containing the retention time, retention index, and spectra. Each
 spectrum is a list of \emph{m/z} and intensities separated by colons (:).
 

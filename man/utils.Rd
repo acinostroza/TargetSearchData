@@ -40,7 +40,7 @@
   a shorthand for \code{find.package('TargetSearchData')}.
 
   \code{tsd_data_path()} returns the full path of the directory where the
-  \code{CDFs} and othe example files of \code{\link[TargetSearch]{TargetSearch}}
+  \code{CDFs} and other example files of \code{\link[TargetSearch]{TargetSearch}}
   are located. This path is hard-coded to \code{'gc-ms-data'}. The path can be
   changed by setting the data path parameter \code{datapath}, though this is
   unnecessary in general.
